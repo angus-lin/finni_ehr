@@ -23,6 +23,15 @@ export const Dashboard = () => {
 
   const handleNew = (newData) => {
     setData([...data, newData]);
+    axios({
+      method: "get",
+      url: "http://localhost:3000/api/patients",
+    })
+      .then((response) => {
+        console.log(response);
+        setData(response.data);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

@@ -6,8 +6,14 @@ export const PatientModal = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
-  const successMessage = () => {
-    messageApi.success("Successfully added new patient!");
+  const successMessage = (method) => {
+    let interpolate;
+    if (method == "patch") {
+      interpolate = "updated";
+    } else {
+      interpolate = "added";
+    }
+    messageApi.success(`Successfully ${interpolate} new patient!`);
   };
 
   const errorMessage = (err) => {
@@ -129,7 +135,9 @@ export const PatientModal = (props) => {
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
           setIsModalOpen(false);
-          props.update(patient);
+          if (props.update) {
+            props.update(patient);
+          }
           setPatient({
             first_name: "",
             middle_name: "",
@@ -142,7 +150,7 @@ export const PatientModal = (props) => {
             province: "",
             country: "",
           });
-          successMessage();
+          successMessage(method);
         }
       })
       .catch((err) => {
