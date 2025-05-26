@@ -137,19 +137,19 @@ export const PatientModal = (props) => {
           setIsModalOpen(false);
           if (props.update) {
             props.update(patient);
+            setPatient({
+              first_name: "",
+              middle_name: "",
+              last_name: "",
+              dob: "",
+              status: "",
+              street_address: "",
+              postal_code: "",
+              city: "",
+              province: "",
+              country: "",
+            });
           }
-          setPatient({
-            first_name: "",
-            middle_name: "",
-            last_name: "",
-            dob: "",
-            status: "",
-            street_address: "",
-            postal_code: "",
-            city: "",
-            province: "",
-            country: "",
-          });
           successMessage(method);
         }
       })
