@@ -13,7 +13,7 @@ export const PatientModal = (props) => {
     } else {
       interpolate = "added";
     }
-    messageApi.success(`Successfully ${interpolate} new patient!`);
+    messageApi.success(`Successfully ${interpolate} patient!`);
   };
 
   const errorMessage = (err) => {

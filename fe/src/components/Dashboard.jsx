@@ -9,29 +9,24 @@ const { Title } = Typography;
 export const Dashboard = () => {
   const [data, setData] = useState([]);
 
-  useEffect(() => {
+  const getPatients = () => {
     axios({
       method: "get",
       url: "http://localhost:3000/api/patients",
     })
       .then((response) => {
-        console.log(response);
         setData(response.data);
       })
       .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    getPatients();
   }, []);
 
   const handleNew = (newData) => {
     setData([...data, newData]);
-    axios({
-      method: "get",
-      url: "http://localhost:3000/api/patients",
-    })
-      .then((response) => {
-        console.log(response);
-        setData(response.data);
-      })
-      .catch((err) => console.log(err));
+    getPatients();
   };
 
   return (
